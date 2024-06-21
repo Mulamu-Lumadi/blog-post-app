@@ -1,12 +1,13 @@
 <%- include("partials/header.ejs") %>
     <section id="addPosts">
-        <%#  %>
+        <%# use flag to pick form and subsequent endpoint %>
         <% if (num > -1) { %>
             <%- include("partials/editForm.ejs") %>
         <% } else { %>
             <%- include("partials/form.ejs") %>            
         <% } %>
     </section>
+    <%# use loop to print out posts if blogposts array is populated with 1/more objects %>
     <% if (posts.length > 0) { %>
     <%     posts.forEach((post, index) => { %>
                 <div class="row my-5">
@@ -16,7 +17,9 @@
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
+                                <%# print out the post body %>
                             <p><%= post.content %></p>
+                            <%# in case post has been edited, print "Edited" %>
                             <% if (post.edit) { %>
                                 <footer class="blockquote-footer mt-3">Edited: <%= post.postDate %> </footer>
                             <% }  else { %>
@@ -27,6 +30,7 @@
                         <form method="post">
                             <div class="row mb-4">
                                 <div class="col">
+                                    <%# use index from loop execution to get the index of the post in the blogpost array %>
                                     <button type="submit" class="btn btn-danger w-100" formaction="/delete/<%= index %>">DELETE</button>
                                 </div>
                                 <div class="col">
@@ -38,6 +42,6 @@
                 </div>
         <% }); %>
         <% }  else { %>
-            <h1>No Posts have been made yet</h1>
+            <h1 class="mt-3">No Posts have been made yet</h1>
         <% } %>
 <%- include("partials/footer.ejs") %>
