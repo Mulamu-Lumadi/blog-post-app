@@ -1,0 +1,43 @@
+<%- include("partials/header.ejs") %>
+    <section id="addPosts">
+        <%#  %>
+        <% if (num > -1) { %>
+            <%- include("partials/editForm.ejs") %>
+        <% } else { %>
+            <%- include("partials/form.ejs") %>            
+        <% } %>
+    </section>
+    <% if (posts.length > 0) { %>
+    <%     posts.forEach((post, index) => { %>
+                <div class="row my-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <%= post.title %>
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                            <p><%= post.content %></p>
+                            <% if (post.edit) { %>
+                                <footer class="blockquote-footer mt-3">Edited: <%= post.postDate %> </footer>
+                            <% }  else { %>
+                                <footer class="blockquote-footer mt-3">Posted: <%= post.postDate %> </footer>
+                            <% } %>
+                            </blockquote>
+                        </div>
+                        <form method="post">
+                            <div class="row mb-4">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-danger w-100" formaction="/delete/<%= index %>">DELETE</button>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-dark w-100" formaction="/edit/<%= index %>">Edit</button>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                </div>
+        <% }); %>
+        <% }  else { %>
+            <h1>No Posts have been made yet</h1>
+        <% } %>
+<%- include("partials/footer.ejs") %>

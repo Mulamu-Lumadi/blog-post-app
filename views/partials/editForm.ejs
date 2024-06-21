@@ -1,0 +1,5 @@
+<form action="/editSubmit/<%= num %>" method="post">
+    <input type="text" name="titleText" placeholder="Enter title" class="title-text" value="<%= posts[num].title %>">
+    <textarea type="text" name="bodyText" placeholder="Enter the body content" class="body-text"><%= posts[num].content %></textarea>
+    <button type="submit" class="btn btn-dark btn-lg">Edit</button>
+</form>
